@@ -1,12 +1,18 @@
+#imports
 import gtk
 
+#create the full application with PyApp class
 class PyApp(gtk.Window):
     def __init__(self):
         super(PyApp, self).__init__()
-        self.set_title('Toolbar')
-        self.set_default_size(250, 200)
+        #set the title name
+        self.set_title('incf in psychopy Toolbar')
+        #set the screen size 300X300
+        self.set_default_size(300, 300)
         self.set_position(gtk.WIN_POS_CENTER)
-
+        
+        # create the actual buttons and codes sizes names and radio
+        #buttons
         toolbar = gtk.Toolbar()
         toolbar.set_style(gtk.TOOLBAR_ICONS)
         toolbar.set_orientation(gtk.ORIENTATION_HORIZONTAL)
@@ -19,7 +25,8 @@ class PyApp(gtk.Window):
         rb2 = gtk.RadioToolButton(rb1, gtk.STOCK_JUSTIFY_RIGHT)
         prv = gtk.ToggleToolButton(gtk.STOCK_PRINT_PREVIEW)
         quitbtn = gtk.ToolButton(gtk.STOCK_QUIT)
-
+        
+        # attach and insert them
         toolbar.insert(newbtn, 0)
         toolbar.insert(openbtn, 1)
         toolbar.insert(savebtn, 2)
@@ -28,19 +35,21 @@ class PyApp(gtk.Window):
         toolbar.insert(rb2, 5)
         toolbar.insert(prv, 6)
         toolbar.insert(quitbtn, 7)
-
+        
+        # create a clickable quite button
         quitbtn.connect('clicked', gtk.main_quit)
-
+        
+        #add vbox pack
         vbox = gtk.VBox(False, 2)
         vbox.pack_start(toolbar, False, False, 0)
-
         self.add(vbox)
         self.connect('destroy', gtk.main_quit)
         self.show_all()
-
+    # combine all classes and execute them
     def on_checked(self, widget, data=None):
         state='Button1 : '+str(self.btn1.get_active())+' button2 :'+str(self.btn2.get_active())
         self.lbl.set_text(state)
+#run if their was no error
 if __name__ == '__main__':
     PyApp()
     gtk.main()
